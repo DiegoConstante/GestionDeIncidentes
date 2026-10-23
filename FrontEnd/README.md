@@ -61,5 +61,5 @@ la autorización real se aplica en la API. Un 403 conserva la sesión y muestra 
 error de permisos.
 
 El almacenamiento en `localStorage` puede exponer el token ante XSS y no se usan
-cookies HttpOnly: **POR CONFIRMAR** si se cambiará este diseño. No existen
-pruebas automatizadas de frontend en `package.json`: **POR CONFIRMAR**.
+cookies HttpOnly. No existen pruebas automatizadas de frontend en `package.json`;
+la validación actual del frontend es manual sobre el sitio publicado.

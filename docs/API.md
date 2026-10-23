@@ -1,6 +1,7 @@
 # API
 
-En producción la base será **[POR COMPLETAR TRAS EL DESPLIEGUE: URL de la API]**.
+En producción la API está disponible en
+`https://gestiondeincidentes-49oe.onrender.com`.
 En local el puerto depende de `PORT`.
 
 ## Respuestas y acceso

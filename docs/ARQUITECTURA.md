@@ -14,9 +14,10 @@ flowchart LR
 ```
 
 El frontend React/Vite se compila como sitio estático. La API Express se ejecuta
-en Render con `npm start` y se conecta a PostgreSQL mediante Prisma. Las URLs
-finales quedan **[POR COMPLETAR TRAS EL DESPLIEGUE: URL del frontend]** y
-**[POR COMPLETAR TRAS EL DESPLIEGUE: URL de la API]**.
+en Render con `npm start` y se conecta a PostgreSQL mediante Prisma.
+
+- Frontend: `https://diegoconstante.github.io/GestionDeIncidentes/`
+- API: `https://gestiondeincidentes-49oe.onrender.com`
 
 ## Capas del backend
 
@@ -49,8 +50,8 @@ del documento y el cambio entre login y panel es renderizado condicional.
 - La conexión Prisma activa SSL explícito solo si el hostname termina en
   `.render.com`, que corresponde a la URL externa; la URL interna no lo activa.
 - El plan gratuito puede suspender el servicio cuando está inactivo, por lo que
-  la primera solicitud puede tardar más. La disponibilidad exacta del servicio
-  es **POR CONFIRMAR** después del despliegue.
+  la primera solicitud puede tardar más; esta condición debe considerarse al
+  realizar demostraciones.
 - `render.yaml` no ejecuta migraciones: el usuario de aplicación solo tiene
   permisos de CRUD. El esquema debe estar preparado antes de iniciar la API.
 
@@ -61,11 +62,14 @@ descripción, responsable, prioridad, estado y fechas. Los roles son `ADMIN` y
 `ANALISTA`; solo `ADMIN` puede eliminar. La API protege las rutas de incidentes
 con JWT y valida cuerpos con Zod.
 
-## Pendientes de producción
+## Estado del despliegue
 
-- URLs públicas y comprobación HTTPS: **POR COMPLETAR TRAS EL DESPLIEGUE**.
-- Confirmación de la disponibilidad de PostgreSQL y del servicio gratuito:
-  **POR CONFIRMAR**.
+- Frontend publicado en
+  `https://diegoconstante.github.io/GestionDeIncidentes/`.
+- API publicada en `https://gestiondeincidentes-49oe.onrender.com`.
+- PostgreSQL está provisionado en Render.
+- La validación manual de autenticación, CRUD y autorización por rol está
+  aprobada.
 - El archivo `BackEnd/docker-compose.yml` declara MySQL aunque la aplicación
   usa PostgreSQL; no forma parte de la topología de producción configurada:
   **POR CONFIRMAR** si se conservará como recurso local.

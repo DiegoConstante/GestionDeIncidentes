@@ -1,13 +1,14 @@
 # Guion de defensa — 10 minutos
 
-La evidencia de ejecución se encuentra en el informe T1S8.
+La demostración se realizará sobre los servicios desplegados. No se incluyen
+capturas ni referencias a un informe de evidencias.
 
 | Momento | Tiempo | Contenido | Evidencia |
 |---|---:|---|---|
 | Problema y alcance | 1 min | Gestión autenticada de incidentes para ADMIN y ANALISTA | Aplicación y modelo `Incidente` |
 | Arquitectura | 1 min | Frontend estático, API Express y PostgreSQL | `docs/ARQUITECTURA.md` |
-| Demostración | 4 min | Login, listado, filtro, búsqueda, creación, edición y eliminación por rol | T1S8 y aplicación |
-| Calidad y operación | 2 min | Jest, verificador, smoke, JWT, CORS, rate limit y health check | `docs/PRUEBAS.md` |
+| Demostración | 4 min | Login, listado, filtro, búsqueda, creación, edición y eliminación por rol | Aplicación desplegada |
+| Calidad y operación | 2 min | Jest, verificador, smoke, JWT, CORS, rate limit y endpoints operativos | `docs/PRUEBAS.md` |
 | Límites y cierre | 2 min | Plan gratuito, `localStorage`, migraciones separadas y mejoras | Lecciones aprendidas |
 
 ## Guion
@@ -80,7 +81,7 @@ en el repositorio: **POR CONFIRMAR**.
 El verificador de entrega ofrece la mayor confianza funcional porque combina
 autenticación, casos negativos, CRUD y autorización por rol contra una API real,
 y elimina el registro temporal. Se complementa con el smoke test y la prueba
-manual del navegador documentados en T1S8.
+manual del navegador documentados en `docs/PRUEBAS.md`.
 
 ## Plan de contingencia
 
@@ -88,6 +89,6 @@ manual del navegador documentados en T1S8.
   interpretar el primer timeout como fallo funcional sin una segunda prueba.
 - **Base con vencimiento a los 30 días:** **POR CONFIRMAR** según el proveedor;
   revisar el estado y respaldo antes de la fecha límite.
-- **Falla durante la demostración en vivo:** usar la evidencia de T1S8, explicar
-  el último resultado verificable y mostrar los contratos/documentos sin inventar
-  una respuesta del servicio.
+- **Falla durante la demostración en vivo:** explicar el último resultado
+  verificable y mostrar los contratos/documentos sin inventar una respuesta del
+  servicio.

@@ -32,10 +32,10 @@ explícita del adaptador.
 
 ## Despliegue de producción
 
-Las URLs aún no existen:
+Servicios desplegados:
 
-- API: **[POR COMPLETAR TRAS EL DESPLIEGUE: URL de la API]**
-- Frontend: **[POR COMPLETAR TRAS EL DESPLIEGUE: URL del frontend]**
+- API: `https://gestiondeincidentes-49oe.onrender.com`
+- Frontend: `https://diegoconstante.github.io/GestionDeIncidentes/`
 
 Orden previsto:
 
@@ -46,8 +46,8 @@ Orden previsto:
    y comprobar `/health`.
 4. Configurar `VITE_API_URL` con la raíz de la API, sin barra final.
 5. Compilar y publicar el frontend con base `/GestionDeIncidentes/`.
-6. Actualizar `CLIENT_ORIGIN` con el origen del frontend publicado y repetir la
-   comprobación de autenticación y CRUD.
+6. Actualizar `CLIENT_ORIGIN` con el origen del frontend publicado y comprobar
+   autenticación y CRUD.
 
 La configuración de Render usa región Virginia, plan gratuito, `BackEnd` como
 raíz, `/health` como health check, `NODE_ENV=production` y `APP_VERSION=1.0.0`.
@@ -74,8 +74,10 @@ repositorio.
 
 - `GET /health` debe responder `status: "ok"` y `version: "1.0.0"`.
 - `GET /api/version` debe responder `version: "1.0.0"`.
-- Las pruebas públicas de producción están enumeradas como `NO EJECUTADO` en
-  [docs/PRUEBAS.md](docs/PRUEBAS.md) hasta disponer de las URLs.
+- Las pruebas manuales de autenticación, CRUD, autorización por rol y
+  disponibilidad de los endpoints operativos están registradas en
+  [docs/PRUEBAS.md](docs/PRUEBAS.md). `APP_VERSION` está configurada en Render
+  con el valor `1.0.0`.
 
 ## Documentación
 
