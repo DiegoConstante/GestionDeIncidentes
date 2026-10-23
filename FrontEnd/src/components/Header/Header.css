@@ -1,0 +1,128 @@
+.header {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 30px 0 28px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.17);
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #60a5fa;
+  color: #bfdbfe;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto;
+  color: var(--body);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.userRole {
+  color: gold;
+  font-weight: 700;
+}
+
+.logoutBtn {
+  padding: 10px 14px;
+  color: #fca5a5;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  margin-left: 2em;
+  background: none;
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.logoutBtn:hover {
+  color: #fee2e2;
+  background: rgba(239, 68, 68, 0.2);
+}
+
+.headerNav a {
+  padding: 10px 14px;
+  color: inherit;
+  background: rgba(51, 65, 85, 0.65);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.headerNav a:hover {
+  color: var(--text);
+  background: #3b4d66;
+}
+
+.headerToggle {
+  display: none;
+  width: 44px;
+  height: 40px;
+  padding: 8px;
+  margin-left: auto;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.headerToggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--text);
+}
+
+@media (max-width: 700px) {
+  .header {
+    width: min(100% - 28px, 1120px);
+    flex-wrap: wrap;
+    padding-top: 20px;
+  }
+
+  .headerToggle {
+    display: block;
+  }
+
+  .headerNav {
+    display: none;
+    order: 3;
+    width: 100%;
+    margin: 6px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .headerOpen .headerNav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .logoutBtn {
+    margin-left: 0;
+    margin-top: 2em;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    background: none;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+  }
+
+  .headerNav a,
+  .headerNav button {
+    width: 100%;
+    text-align: left;
+  }
+}

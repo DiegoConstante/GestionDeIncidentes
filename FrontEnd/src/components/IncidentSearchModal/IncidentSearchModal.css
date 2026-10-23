@@ -1,0 +1,100 @@
+.searchModal {
+  width: min(620px, calc(100% - 28px));
+  max-height: calc(100vh - 28px);
+  padding: 0;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.searchModal::backdrop {
+  background: rgba(2, 6, 23, 0.76);
+  backdrop-filter: blur(3px);
+}
+
+.searchHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.searchClose {
+  align-self: flex-start;
+  padding: 10px 13px;
+  color: var(--body);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.searchClose:hover {
+  color: var(--text);
+  background: #663b3b;
+}
+
+.searchForm {
+  padding: 24px 28px 28px;
+}
+
+.searchField label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--body);
+  font-size: 0.87rem;
+  font-weight: 700;
+}
+
+.searchField input {
+  width: 100%;
+  color: var(--text);
+  background: #172337;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 11px 12px;
+}
+
+.searchField small {
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.searchActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.searchBtn {
+  border: 0;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: white;
+  font-weight: 700;
+}
+
+.searchPrimary {
+  background: var(--blue);
+}
+
+.searchPrimary:hover:not(:disabled) {
+  background: #144ecc;
+}
+
+.searchSecondary {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+}
+
+.searchSecondary:hover:not(:disabled) {
+  background: #3b4d66;
+}

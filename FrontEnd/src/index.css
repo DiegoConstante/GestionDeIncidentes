@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-raised: #263449;
+  --border: #334155;
+  --text: #f8fafc;
+  --body: #e2e8f0;
+  --muted: #94a3b8;
+  --blue: #3b82f6;
+  --green: #10b981;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --shadow: 0 18px 45px rgba(2, 6, 23, 0.24);
+  font-family: "DM Sans", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+}
+
+h2 {
+  font-size: 1.45rem;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #fbbf24;
+  outline-offset: 3px;
+}
