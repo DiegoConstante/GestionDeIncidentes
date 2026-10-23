@@ -1,6 +1,6 @@
 # Pruebas
 
-Casos de `development`, sin «Evidencia» ni capturas.
+Casos de `development`, La evidencia de ejecución (salida de verificar-entrega.js y smoke) está en el informe T1S8.
 
 ## Ejecución automatizada
 
