@@ -17,13 +17,15 @@ export default function IncidentDetailModal({
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const [status, setStatus] = useState(incident?.estado || "ABIERTO");
+  const [prevIncident, setPrevIncident] = useState(incident);
   const { feedback, showSuccess, showError, clear } = useFeedback(10000);
 
-  useEffect(() => {
-    if (incident) {
-      setStatus(incident.estado);
-    }
-  }, [incident]);
+  // Reinicia el selector de estado cada vez que cambia el incidente.
+  // Se hace durante el render (patrón recomendado por React) y no en un efecto.
+  if (incident !== prevIncident) {
+    setPrevIncident(incident);
+    if (incident) setStatus(incident.estado);
+  }
 
   // Limpia el mensaje solo al cambiar de incidente (o al cerrar).
   // Se usa el id y no el objeto, porque tras actualizar el objeto cambia

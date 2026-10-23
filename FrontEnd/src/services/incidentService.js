@@ -1,7 +1,6 @@
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3000/api/incidentes";
-
 import { getToken } from "./authService";
+
+const API_URL = `${import.meta.env.VITE_API_URL}/api/incidentes`;
 
 // Obtención del token
 function getTokenFromStorage() {
@@ -43,6 +42,7 @@ async function request(path = "", options = {}) {
       console.error("Error de red o servidor no disponible:", error);
       throw new Error(
         "El servidor no se encuentra disponible o hubo un problema de red.",
+        { cause: error },
       );
     }
     throw error;

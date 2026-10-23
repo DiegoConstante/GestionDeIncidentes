@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Header.css";
 
-export default function Header({ user, onLogout, onCreate }) {
+export default function Header({ user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function closeMenu() {

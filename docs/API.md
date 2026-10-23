@@ -1,7 +1,7 @@
-# API local
+# API
 
-Base local por defecto: `http://localhost:3000`; el puerto depende de `PORT`.
-No se documentan URLs de producción.
+En producción la base será **[POR COMPLETAR TRAS EL DESPLIEGUE: URL de la API]**.
+En local el puerto depende de `PORT`.
 
 ## Respuestas y acceso
 
@@ -75,7 +75,6 @@ Solo ADMIN. Responde 200 con `{ "id": <número> }`; ID inválido 400 e inexisten
 
 ## Frontend
 
-`authService.js` usa `/api/auth/login` y `incidentService.js` usa la base de
-incidentes. El valor alternativo de `VITE_API_URL` en este último ya incluye
-`/api/incidentes`, mientras el primero usa la raíz local; el uso de un único
-valor para ambos queda **POR CONFIRMAR**.
+`VITE_API_URL` debe contener únicamente la raíz de la API, sin barra final.
+`authService.js` agrega `/api/auth/login` y `incidentService.js` agrega
+`/api/incidentes`.

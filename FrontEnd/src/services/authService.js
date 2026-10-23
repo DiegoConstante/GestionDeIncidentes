@@ -1,39 +1,33 @@
 // Servicio de autenticación que comunica con el backend API
 // Usa JWT para autenticación y maneja tokens en localStorage
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = import.meta.env.VITE_API_URL;
 
-export function authenticate(email, password) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ correo: email, password }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.mensaje || "Error al iniciar sesión");
-      }
-
-      const data = await response.json();
-
-      // Guardar el token en localStorage
-      localStorage.setItem(
-        "incidentAppAuth",
-        JSON.stringify({
-          user: data.usuario,
-          token: data.token,
-          isAuthenticated: true,
-        }),
-      );
-
-      resolve(data.usuario);
-    } catch (error) {
-      reject(error);
-    }
+export async function authenticate(email, password) {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ correo: email, password }),
   });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.mensaje || "Error al iniciar sesión");
+  }
+
+  const data = await response.json();
+
+  // Guardar el token en localStorage
+  localStorage.setItem(
+    "incidentAppAuth",
+    JSON.stringify({
+      user: data.usuario,
+      token: data.token,
+      isAuthenticated: true,
+    }),
+  );
+
+  return data.usuario;
 }
 
 export function logout() {
@@ -109,10 +103,15 @@ window.fetch = async function (...args) {
   // Ejecutamos la petición HTTP normal
   const response = await originalFetch(resource, config);
 
-  // LA CLAVE: Si el backend responde con 401 (Token expirado / No autorizado)
-  if (response.status === 401) {
+  // Un 401 en el inicio de sesión significa "credenciales incorrectas",
+  // no "sesión expirada": en ese caso se deja que el login muestre su mensaje.
+  const isLogin =
+    typeof resource === "string" && resource.includes("/api/auth/login");
+
+  // Si el backend responde 401 (token expirado o no autorizado)
+  if (response.status === 401 && !isLogin) {
     logout(); // 1. Borra los datos de la sesión del localStorage
-    window.location.href = "/"; // 2. Redirige inmediatamente a la vista de login
+    window.location.href = import.meta.env.BASE_URL; // 2. Vuelve al login respetando la ruta base
     throw new Error(
       "Su sesión ha expirado. Por favor, inicie sesión nuevamente.",
     );
@@ -133,6 +132,8 @@ try {
       token: parsed.token,
     };
   }
-} catch {}
+} catch {
+  // Sin sesión guardada o con datos dañados: se parte sin autenticar.
+}
 
 export { initialAuthState };

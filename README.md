@@ -1,60 +1,87 @@
 # Gestión de incidentes
 
-Aplicación local para autenticar usuarios y administrar incidentes mediante una API
-Express/Prisma y una interfaz React/Vite.
+Aplicación web para autenticación y gestión de incidentes. El frontend estático
+consume la API Express, que persiste los datos en PostgreSQL mediante Prisma.
 
-## Alcance de ramas
-
-- `development`: trabajo local de los desarrolladores.
-- `main`: versión lista para desplegar.
-- El flujo va únicamente de `development` hacia `main`.
-
-Este README describe el trabajo local de `development`; no contiene URLs ni
-instrucciones de producción.
-
-## Requisitos e instalación
+## Requisitos y estructura
 
 - Node.js 22.x.
-- PostgreSQL accesible localmente.
-- Dependencias instaladas en `BackEnd/` y `FrontEnd/`.
-- Variables de `BackEnd/.env` configuradas a partir de `BackEnd/.env.example`.
+- PostgreSQL administrado por el servicio configurado para la API.
+- `BackEnd/`: API, Prisma, pruebas y scripts.
+- `FrontEnd/`: aplicación React/Vite.
+- `docs/`: documentación técnica, pruebas y manual.
 
-```powershell
-cd BackEnd
-npm install
-cd ..\FrontEnd
-npm install
-```
+La instalación de dependencias se realiza en cada aplicación con `npm ci`.
+Los comandos de desarrollo y pruebas locales se describen en la documentación
+específica de cada carpeta.
 
-El backend requiere `DATABASE_URL`, `JWT_SECRET` y `CLIENT_ORIGIN`. También
-admite `PORT`, `NODE_ENV`, `APP_VERSION` y `JWT_EXPIRES_IN`. No se guardan
-secretos en el repositorio ni se ejecuta el seeder como parte de este flujo.
-
-## Comandos
-
-Desde `BackEnd/`: `npm run dev`, `npm start`, `npm test`,
-`npm run test:coverage`, `npm run lint`, `npm run smoke` y
-`npm run verificar-entrega`. Los pasos detallados para preparar las variables,
-introducir las contraseñas de demostración y ejecutar el verificador están en
-[docs/PRUEBAS.md](docs/PRUEBAS.md).
-
-Desde `FrontEnd/`: `npm run dev`, `npm run build`, `npm run lint` y
-`npm run preview`. El cliente usa `VITE_API_URL`; `CLIENT_ORIGIN` define el
-origen permitido por CORS.
-
-## Estructura
+## Arquitectura de producción
 
 ```text
-BackEnd/src/       aplicación, rutas, controladores, servicios y middlewares
-BackEnd/prisma/    schema y migraciones PostgreSQL
-BackEnd/tests/     pruebas Jest unitarias
-BackEnd/scripts/   smoke y verificación CRUD/autenticación
-FrontEnd/src/      interfaz React y servicios HTTP
-docs/              documentación técnica y de pruebas
+Navegador
+  -> Frontend estático publicado en /GestionDeIncidentes/
+  -> API Node/Express en Render (HTTPS)
+  -> PostgreSQL en Render
 ```
+
+El backend limita CORS a `CLIENT_ORIGIN`, permite `Authorization`, activa
+`trust proxy`, utiliza Helmet, rate limit, sanitización y logs con la cabecera
+de autorización redactada. La conexión PostgreSQL usa SSL cuando la URL apunta a
+un host externo de Render; la URL interna de producción no activa esa opción
+explícita del adaptador.
+
+## Despliegue de producción
+
+Las URLs aún no existen:
+
+- API: **[POR COMPLETAR TRAS EL DESPLIEGUE: URL de la API]**
+- Frontend: **[POR COMPLETAR TRAS EL DESPLIEGUE: URL del frontend]**
+
+Orden previsto:
+
+1. Crear/configurar PostgreSQL y sus credenciales de aplicación con permisos
+   solo de CRUD.
+2. Configurar las variables del servicio API en Render.
+3. Desplegar la API con `npm ci && npx prisma generate`, iniciar con `npm start`
+   y comprobar `/health`.
+4. Configurar `VITE_API_URL` con la raíz de la API, sin barra final.
+5. Compilar y publicar el frontend con base `/GestionDeIncidentes/`.
+6. Actualizar `CLIENT_ORIGIN` con el origen del frontend publicado y repetir la
+   comprobación de autenticación y CRUD.
+
+La configuración de Render usa región Virginia, plan gratuito, `BackEnd` como
+raíz, `/health` como health check, `NODE_ENV=production` y `APP_VERSION=1.0.0`.
+No ejecuta migraciones automáticamente porque el usuario de aplicación no debe
+tener permisos DDL. La aplicación debe recibir un esquema ya preparado.
+
+## Variables de producción
+
+| Variable | Dónde se configura | Forma esperada | Secreto |
+|---|---|---|---|
+| `DATABASE_URL` | Render, servicio API | URL interna PostgreSQL con usuario solo CRUD | Sí |
+| `JWT_SECRET` | Render, servicio API | Clave nueva, larga y distinta de desarrollo | Sí |
+| `CLIENT_ORIGIN` | Render, servicio API | Esquema y dominio del frontend, sin ruta ni barra final | No |
+| `NODE_ENV` | `render.yaml` | `production` | No |
+| `APP_VERSION` | `render.yaml` | `1.0.0` | No |
+| `JWT_EXPIRES_IN` | Render si se sobrescribe | Duración aceptada por `jsonwebtoken`, por defecto `30m` | No |
+| `PORT` | Render | Puerto proporcionado por la plataforma | No |
+| `VITE_API_URL` | entorno de compilación del frontend | URL raíz de la API, sin barra final | No |
+
+Los valores reales deben configurarse manualmente; no se guardan en el
+repositorio.
+
+## Comprobación
+
+- `GET /health` debe responder `status: "ok"` y `version: "1.0.0"`.
+- `GET /api/version` debe responder `version: "1.0.0"`.
+- Las pruebas públicas de producción están enumeradas como `NO EJECUTADO` en
+  [docs/PRUEBAS.md](docs/PRUEBAS.md) hasta disponer de las URLs.
 
 ## Documentación
 
 - [Arquitectura](docs/ARQUITECTURA.md)
 - [API](docs/API.md)
 - [Pruebas](docs/PRUEBAS.md)
+- [Manual de usuario](docs/MANUAL_USUARIO.md)
+- [Lecciones aprendidas](docs/LECCIONES_APRENDIDAS.md)
+- [Frontend](FrontEnd/README.md)
