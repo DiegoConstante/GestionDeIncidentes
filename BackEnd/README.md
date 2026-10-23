@@ -173,10 +173,9 @@ genérico, aunque el detalle completo queda en los logs del servidor.
 
 ### Prueba de humo
 
-Desde `BackEnd`, con el backend accesible:
+Desde `BackEnd`, con el backend accesible: API_URL = "http://localhost:3000"
 
 ```powershell
-$env:API_URL = "http://localhost:3000"
 npm run smoke
 ```
 

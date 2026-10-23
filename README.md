@@ -34,12 +34,9 @@ secretos en el repositorio ni se ejecuta el seeder como parte de este flujo.
 
 Desde `BackEnd/`: `npm run dev`, `npm start`, `npm test`,
 `npm run test:coverage`, `npm run lint`, `npm run smoke` y
-`npm run verificar-entrega`.
-
-El smoke test requiere `API_URL` y comprueba `/health` y `/api/version`. El
-verificador requiere `API_URL`, `DEMO_EMAIL`, `DEMO_PASSWORD` y, para el caso
-de rol insuficiente, `DEMO_ANALISTA_EMAIL` y `DEMO_ANALISTA_PASSWORD`. Las
-credenciales solo se pasan al ejecutar.
+`npm run verificar-entrega`. Los pasos detallados para preparar las variables,
+introducir las contraseñas de demostración y ejecutar el verificador están en
+[docs/PRUEBAS.md](docs/PRUEBAS.md).
 
 Desde `FrontEnd/`: `npm run dev`, `npm run build`, `npm run lint` y
 `npm run preview`. El cliente usa `VITE_API_URL`; `CLIENT_ORIGIN` define el
